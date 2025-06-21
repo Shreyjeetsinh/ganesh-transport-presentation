@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ganesh Transport Management System - Project Presentation</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚛</text></svg>">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1a2038;
+            --secondary-color: #213581;
+            --accent-color: #eeeee5;
+            --text-dark: #333;
+            --text-light: #666;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .presentation-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .slide {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .slide:hover {
+            transform: translateY(-5px);
+        }
+
+        .slide-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .slide-content {
+            padding: 40px;
+        }
+
+        .student-info {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .student-info h3 {
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .student-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .student-detail {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
+
+        .student-detail strong {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .student-detail span {
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .feature-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 15px 0;
+            border-left: 4px solid var(--primary-color);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .tech-badge {
+            background: var(--primary-color);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .database-schema {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .table-schema {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            border: 1px solid #dee2e6;
+        }
+
+        .table-name {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .field-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .field-list li {
+            padding: 5px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 14px;
+        }
+
+        .field-list li:last-child {
+            border-bottom: none;
+        }
+
+        .screenshot-container {
+            text-align: center;
+            margin: 20px 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            background: white;
+            border: 1px solid #e0e0e0;
+        }
+
+        .screenshot-container img {
+            width: 100%;
+            height: auto;
+            max-height: 400px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .screenshot-container:hover img {
+            transform: scale(1.02);
+        }
+
+        .screenshot-placeholder {
+            background: linear-gradient(45deg, #f0f0f0 25%, transparent 25%), 
+                        linear-gradient(-45deg, #f0f0f0 25%, transparent 25%), 
+                        linear-gradient(45deg, transparent 75%, #f0f0f0 75%), 
+                        linear-gradient(-45deg, transparent 75%, #f0f0f0 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+            height: 300px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            font-style: italic;
+        }
+
+        .navigation {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            margin: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: var(--secondary-color);
+            transform: scale(1.1);
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+            z-index: 1001;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .presentation-container {
+                padding: 10px;
+            }
+            
+            .slide-content {
+                padding: 20px;
+            }
+            
+            .navigation {
+                position: static;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+
+            .student-details {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <div class="navigation">
+        <button class="nav-btn" onclick="scrollToSlide(0)" title="Title"><i class="fas fa-home"></i></button>
+        <button class="nav-btn" onclick="scrollToSlide(1)" title="Student Info"><i class="fas fa-user-graduate"></i></button>
+        <button class="nav-btn" onclick="scrollToSlide(2)" title="Overview"><i class="fas fa-info-circle"></i></button>
+        <button class="nav-btn" onclick="scrollToSlide(3)" title="Features"><i class="fas fa-star"></i></button>
+        <button class="nav-btn" onclick="scrollToSlide(4)" title="Technology"><i class="fas fa-code"></i></button>
+        <button class="nav-btn" onclick="scrollToSlide(5)" title="Database"><i class="fas fa-database"></i></button>
+        <button class="nav-btn" onclick="scrollToSlide(6)" title="Screenshots"><i class="fas fa-images"></i></button>
+        <button class="nav-btn" onclick="scrollToSlide(7)" title="Setup"><i class="fas fa-cog"></i></button>
+    </div>
+
+    <div class="presentation-container">
+        <!-- Slide 1: Title -->
+        <div class="slide" id="slide-0">
+            <div class="slide-header">
+                <h1><i class="fas fa-truck"></i> Ganesh Transport Management System</h1>
+                <p class="lead">A Comprehensive PHP-Based Transport Management Solution</p>
+            </div>
+            <div class="slide-content">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h3>Project Overview</h3>
+                        <p>A modern web-based transport management system designed to streamline truck operations, track trips, manage drivers, and handle financial calculations for transport businesses.</p>
+                        
+                        <div class="stats-container">
+                            <div class="stat-card">
+                                <div class="stat-number">500+</div>
+                                <div class="stat-label">Lines of Code</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">4</div>
+                                <div class="stat-label">Core Modules</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">3</div>
+                                <div class="stat-label">Database Tables</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="screenshot-container">
+                            <div>
+                                <img src="Screenshot 2025-06-21 111203.png" alt="Ganesh Transport Management System" style="width: 100%; height: 100%;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Student Information -->
+        <div class="slide" id="slide-1">
+            <div class="slide-header">
+                <h2><i class="fas fa-user-graduate"></i> Student Information</h2>
+            </div>
+            <div class="slide-content">
+                <div class="student-info">
+                    <h3><i class="fas fa-user"></i> Project Developer</h3>
+                    <div class="student-details">
+                        <div class="student-detail">
+                            <strong>Name</strong>
+                            <span>Shreyjeetsinh Dodiya</span>
+                        </div>
+                        <div class="student-detail">
+                            <strong>Course</strong>
+                            <span>Bachelor of Science in Information Technology(BSCIT)</span>
+                        </div>
+                        <div class="student-detail">
+                            <strong>Roll Number</strong>
+                            <span>10</span>
+                        </div>
+                        <div class="student-detail">
+                            <strong>Class</strong>
+                            <span>BSCIT 3rd Year</span>
+                        </div>
+                        <div class="student-detail">
+                            <strong>Semester</strong>
+                            <span>5th Semester</span>
+                        </div>
+                        <div class="student-detail">
+                            <strong>Project Type</strong>
+                            <span>Web Development</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4><i class="fas fa-calendar"></i> Project Timeline</h4>
+                        <div class="feature-card">
+                            <ul>
+                                <li><strong>Start Date:</strong> January 2024</li>
+                                <li><strong>Development:</strong> 3 months</li>
+                                <li><strong>Testing:</strong> 2 weeks</li>
+                                <li><strong>Completion:</strong> March 2024</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h4><i class="fas fa-tools"></i> Technologies Used</h4>
+                        <div class="feature-card">
+                            <ul>
+                                <li><strong>Backend:</strong> PHP, MySQL</li>
+                                <li><strong>Frontend:</strong> HTML5, CSS3, JavaScript</li>
+                                <li><strong>Framework:</strong> Bootstrap 5</li>
+                                <li><strong>Server:</strong> XAMPP (Apache)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Project Overview -->
+        <div class="slide" id="slide-2">
+            <div class="slide-header">
+                <h2><i class="fas fa-info-circle"></i> Project Overview</h2>
+            </div>
+            <div class="slide-content">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>What is Ganesh Transport?</h4>
+                        <p>Ganesh Transport Management System is a comprehensive web application built with PHP and MySQL that helps transport companies manage their daily operations efficiently.</p>
+                        
+                        <h4>Key Objectives</h4>
+                        <ul>
+                            <li>Streamline truck and driver management</li>
+                            <li>Track trip details and fuel consumption</li>
+                            <li>Calculate trip costs and profits</li>
+                            <li>Provide user authentication and security</li>
+                            <li>Generate reports and analytics</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h4>Target Users</h4>
+                        <div class="feature-card">
+                            <h5><i class="fas fa-user-tie"></i> Transport Company Owners</h5>
+                            <p>Manage multiple trucks and track overall business performance</p>
+                        </div>
+                        <div class="feature-card">
+                            <h5><i class="fas fa-user"></i> Fleet Managers</h5>
+                            <p>Monitor daily operations and driver assignments</p>
+                        </div>
+                        <div class="feature-card">
+                            <h5><i class="fas fa-user-cog"></i> Administrators</h5>
+                            <p>Handle system configuration and user management</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Features -->
+        <div class="slide" id="slide-3">
+            <div class="slide-header">
+                <h2><i class="fas fa-star"></i> Core Features</h2>
+            </div>
+            <div class="slide-content">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4><i class="fas fa-shield-alt"></i> User Authentication</h4>
+                        <div class="feature-card">
+                            <ul>
+                                <li>Secure login/logout system</li>
+                                <li>Session management</li>
+                                <li>User registration</li>
+                                <li>Password protection</li>
+                            </ul>
+                        </div>
+
+                        <h4><i class="fas fa-truck"></i> Truck Management</h4>
+                        <div class="feature-card">
+                            <ul>
+                                <li>Add multiple trucks per user</li>
+                                <li>Track truck numbers</li>
+                                <li>Driver assignment</li>
+                                <li>Truck performance history</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h4><i class="fas fa-route"></i> Trip Management</h4>
+                        <div class="feature-card">
+                            <ul>
+                                <li>Record trip details (from/to locations)</li>
+                                <li>Track distance and fuel consumption</li>
+                                <li>Calculate trip costs</li>
+                                <li>Store trip remarks and notes</li>
+                            </ul>
+                        </div>
+
+                        <h4><i class="fas fa-calculator"></i> Financial Tracking</h4>
+                        <div class="feature-card">
+                            <ul>
+                                <li>Fuel cost calculations</li>
+                                <li>Load weight tracking</li>
+                                <li>Advance payment management</li>
+                                <li>Profit/loss calculations</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Technology Stack -->
+        <div class="slide" id="slide-4">
+            <div class="slide-header">
+                <h2><i class="fas fa-code"></i> Technology Stack</h2>
+            </div>
+            <div class="slide-content">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>Backend Technologies</h4>
+                        <div class="tech-stack">
+                            <span class="tech-badge"><i class="fab fa-php"></i> PHP</span>
+                            <span class="tech-badge"><i class="fas fa-database"></i> MySQL</span>
+                            <span class="tech-badge"><i class="fas fa-server"></i> Apache</span>
+                        </div>
+                        
+                        <h4>Frontend Technologies</h4>
+                        <div class="tech-stack">
+                            <span class="tech-badge"><i class="fab fa-html5"></i> HTML5</span>
+                            <span class="tech-badge"><i class="fab fa-css3-alt"></i> CSS3</span>
+                            <span class="tech-badge"><i class="fab fa-js"></i> JavaScript</span>
+                            <span class="tech-badge"><i class="fab fa-bootstrap"></i> Bootstrap</span>
+                        </div>
+
+                        <h4>Development Tools</h4>
+                        <div class="tech-stack">
+                            <span class="tech-badge"><i class="fas fa-code"></i> XAMPP</span>
+                            <span class="tech-badge"><i class="fas fa-database"></i> phpMyAdmin</span>
+                            <span class="tech-badge"><i class="fab fa-git"></i> Git</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h4>Key Libraries & Frameworks</h4>
+                        <div class="feature-card">
+                            <h5>Bootstrap 5</h5>
+                            <p>Responsive design framework for modern UI</p>
+                        </div>
+                        <div class="feature-card">
+                            <h5>DataTables</h5>
+                            <p>Advanced table functionality with sorting and filtering</p>
+                        </div>
+                        <div class="feature-card">
+                            <h5>Font Awesome</h5>
+                            <p>Icon library for enhanced visual appeal</p>
+                        </div>
+                        <div class="feature-card">
+                            <h5>Google Fonts</h5>
+                            <p>Typography enhancement with Karla and Roboto fonts</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Database Schema -->
+        <div class="slide" id="slide-5">
+            <div class="slide-header">
+                <h2><i class="fas fa-database"></i> Database Architecture</h2>
+            </div>
+            <div class="slide-content">
+                <div class="database-schema">
+                    <h4>Database: <span class="highlight">ganesh</span></h4>
+                    
+                    <div class="table-schema">
+                        <div class="table-name">📋 user</div>
+                        <ul class="field-list">
+                            <li><strong>sno</strong> (int, PK, Auto Increment)</li>
+                            <li><strong>email1</strong> (varchar(255), Unique)</li>
+                            <li><strong>pass1</strong> (varchar(255))</li>
+                            <li><strong>created_at</strong> (timestamp)</li>
+                        </ul>
+                    </div>
+
+                    <div class="table-schema">
+                        <div class="table-name">🚛 trucknum</div>
+                        <ul class="field-list">
+                            <li><strong>id</strong> (int, PK, Auto Increment)</li>
+                            <li><strong>truck_num</strong> (varchar(50))</li>
+                            <li><strong>user_id</strong> (int, FK to user.sno)</li>
+                            <li><strong>created_at</strong> (timestamp)</li>
+                        </ul>
+                    </div>
+
+                    <div class="table-schema">
+                        <div class="table-name">📊 transport</div>
+                        <ul class="field-list">
+                            <li><strong>id</strong> (int, PK, Auto Increment)</li>
+                            <li><strong>truckuser_id</strong> (int, FK to user.sno)</li>
+                            <li><strong>truck_driver</strong> (varchar(100))</li>
+                            <li><strong>truck_id</strong> (varchar(50))</li>
+                            <li><strong>date</strong> (date)</li>
+                            <li><strong>from/to</strong> (varchar(255))</li>
+                            <li><strong>start/end</strong> (decimal(10,2))</li>
+                            <li><strong>km/ltr/amt/avg</strong> (decimal(10,2))</li>
+                            <li><strong>weight/load/bhathu/other</strong> (decimal(10,2))</li>
+                            <li><strong>adv/deva/actual/os</strong> (decimal(10,2))</li>
+                            <li><strong>remark</strong> (text)</li>
+                        </ul>
+                    </div>
+
+                    <div class="table-schema">
+                        <div class="table-name">📧 contact</div>
+                        <ul class="field-list">
+                            <li><strong>id</strong> (int, PK, Auto Increment)</li>
+                            <li><strong>name</strong> (varchar(100))</li>
+                            <li><strong>email</strong> (varchar(255))</li>
+                            <li><strong>subject</strong> (varchar(255))</li>
+                            <li><strong>message</strong> (text)</li>
+                            <li><strong>created_at</strong> (timestamp)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Screenshots -->
+        <div class="slide" id="slide-6">
+            <div class="slide-header">
+                <h2><i class="fas fa-images"></i> Application Screenshots</h2>
+            </div>
+            <div class="slide-content">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="screenshot-container">
+                            <img src="Screenshot 2025-06-21 111203.png" alt="Ganesh Transport Management System - Login Page" style="width: 100%; height: auto; max-height: 300px; object-fit: cover;">
+                            <div style="padding: 15px; background: #f8f9fa; border-top: 1px solid #e0e0e0;">
+                                <strong>Login Interface</strong><br>
+                                <small>Secure authentication system</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="screenshot-container">
+                            <img src="Screenshot 2025-06-21 120425.png" alt="Ganesh Transport Management System - Dashboard" style="width: 100%; height: auto; max-height: 300px; object-fit: cover;">
+                            <div style="padding: 15px; background: #f8f9fa; border-top: 1px solid #e0e0e0;">
+                                <strong>Main Dashboard</strong><br>
+                                <small>Overview of trucks and trips</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="screenshot-container">
+                            <img src="Screenshot 2025-06-21 111345.png" alt="Ganesh Transport Management System - Trip Management" style="width: 100%; height: auto; max-height: 300px; object-fit: cover;">
+                            <div style="padding: 15px; background: #f8f9fa; border-top: 1px solid #e0e0e0;">
+                                <strong>Trip Management</strong><br>
+                                <small>Add and manage trip details</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-md-4">
+                        <div class="screenshot-container">
+                            <img src="Screenshot 2025-06-21 111511.png" alt="Ganesh Transport Management System - Contact Form" style="width: 100%; height: auto; max-height: 300px; object-fit: cover;">
+                            <div style="padding: 15px; background: #f8f9fa; border-top: 1px solid #e0e0e0;">
+                                <strong>Contact Form</strong><br>
+                                <small>Customer communication interface</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="screenshot-container">
+                            <img src="Screenshot 2025-06-21 113119.png" alt="Ganesh Transport Management System - Truck Management" style="width: 100%; height: auto; max-height: 300px; object-fit: cover;">
+                            <div style="padding: 15px; background: #f8f9fa; border-top: 1px solid #e0e0e0;">
+                                <strong>Truck Management</strong><br>
+                                <small>Add and manage trucks</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="screenshot-container">
+                            <div style="height: 300px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white;">
+                                <div style="text-align: center;">
+                                    <i class="fas fa-chart-line" style="font-size: 3rem; margin-bottom: 15px;"></i>
+                                    <br>
+                                    <strong>Reports & Analytics</strong><br>
+                                    <small>Financial tracking and reports</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Setup & Installation -->
+        <div class="slide" id="slide-7">
+            <div class="slide-header">
+                <h2><i class="fas fa-cog"></i> Setup & Installation</h2>
+            </div>
+            <div class="slide-content">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>Prerequisites</h4>
+                        <div class="feature-card">
+                            <ul>
+                                <li>XAMPP (Apache + MySQL + PHP)</li>
+                                <li>PHP 7.4 or higher</li>
+                                <li>MySQL 5.7 or higher</li>
+                                <li>Web browser (Chrome, Firefox, Safari)</li>
+                            </ul>
+                        </div>
+
+                        <h4>Installation Steps</h4>
+                        <div class="feature-card">
+                            <ol>
+                                <li>Install XAMPP on your system</li>
+                                <li>Start Apache and MySQL services</li>
+                                <li>Copy project files to htdocs folder</li>
+                                <li>Import database using phpMyAdmin</li>
+                                <li>Configure database connection</li>
+                                <li>Access application via localhost</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h4>Database Setup</h4>
+                        <div class="feature-card">
+                            <p><strong>1.</strong> Open phpMyAdmin</p>
+                            <p><strong>2.</strong> Create new database: <span class="highlight">ganesh</span></p>
+                            <p><strong>3.</strong> Import <span class="highlight">database_setup.sql</span></p>
+                            <p><strong>4.</strong> Verify tables are created</p>
+                        </div>
+
+                        <h4>Configuration</h4>
+                        <div class="feature-card">
+                            <p><strong>Database Connection:</strong> Update <span class="highlight">db.php</span> with your credentials</p>
+                            <p><strong>Default Admin:</strong> admin@ganeshtransport.com / admin123</p>
+                            <p><strong>Access URL:</strong> http://localhost/php/</p>
+                        </div>
+
+                        <h4>File Structure</h4>
+                        <div class="feature-card">
+                            <ul>
+                                <li><strong>index.php</strong> - Login page</li>
+                                <li><strong>home.php</strong> - Main dashboard</li>
+                                <li><strong>data.php</strong> - Trip management</li>
+                                <li><strong>contact.php</strong> - Contact form</li>
+                                <li><strong>db.php</strong> - Database connection</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Conclusion -->
+        <div class="slide" id="slide-8">
+            <div class="slide-header">
+                <h2><i class="fas fa-check-circle"></i> Project Summary</h2>
+            </div>
+            <div class="slide-content">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h3>What We've Built</h3>
+                        <p>The Ganesh Transport Management System is a comprehensive solution that addresses the real-world needs of transport businesses. It provides a user-friendly interface for managing trucks, drivers, trips, and financial calculations.</p>
+                        
+                        <h4>Key Achievements</h4>
+                        <div class="feature-card">
+                            <ul>
+                                <li>✅ Complete user authentication system</li>
+                                <li>✅ Multi-truck management capabilities</li>
+                                <li>✅ Detailed trip tracking and reporting</li>
+                                <li>✅ Financial calculations and profit tracking</li>
+                                <li>✅ Responsive design for all devices</li>
+                                <li>✅ Secure database architecture</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <h4>Future Enhancements</h4>
+                        <div class="feature-card">
+                            <ul>
+                                <li>📊 Advanced analytics dashboard</li>
+                                <li>📱 Mobile application</li>
+                                <li>🔔 Real-time notifications</li>
+                                <li>📈 Performance reports</li>
+                                <li>🔐 Enhanced security features</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-4">
+                    <h3>Thank You!</h3>
+                    <p class="lead">Ganesh Transport Management System</p>
+                    <p><i class="fas fa-code"></i> Built with PHP, MySQL, and Bootstrap</p>
+                    <p><i class="fas fa-user-graduate"></i> Developed by Shreyjeetsinh Dodiya - BSCIT 3rd Year</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Smooth scrolling to slides
+        function scrollToSlide(slideIndex) {
+            const slide = document.getElementById(`slide-${slideIndex}`);
+            slide.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Progress bar functionality
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.body.offsetHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            document.getElementById('progressBar').style.width = scrollPercent + '%';
+        });
+
+        // Add some interactive effects
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add animation to feature cards
+            const cards = document.querySelectorAll('.feature-card');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'all 0.5s ease';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html> 
